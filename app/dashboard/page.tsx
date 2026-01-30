@@ -3,7 +3,8 @@ import { redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 import { format } from "date-fns";
-import { Dumbbell } from "lucide-react";
+import { Dumbbell, Pencil, Plus } from "lucide-react";
+import Link from "next/link";
 import { getWorkoutsByDate } from "@/data/workouts";
 import {
   Card,
@@ -13,6 +14,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { DashboardDatePicker } from "./_components/dashboard-date-picker";
 
 export default async function DashboardPage({
@@ -35,7 +37,15 @@ export default async function DashboardPage({
     <div className="mx-auto max-w-2xl px-4 py-8">
       <div className="mb-8 flex items-center justify-between">
         <h1 className="text-3xl font-bold">Dashboard</h1>
-        <DashboardDatePicker dateISO={date.toISOString()} />
+        <div className="flex items-center gap-2">
+          <Button asChild size="sm">
+            <Link href="/dashboard/workout/new">
+              <Plus className="h-4 w-4" />
+              New Workout
+            </Link>
+          </Button>
+          <DashboardDatePicker dateISO={date.toISOString()} />
+        </div>
       </div>
 
       {workouts.length === 0 ? (
@@ -54,11 +64,19 @@ export default async function DashboardPage({
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <CardTitle>{workout.name ?? "Untitled Workout"}</CardTitle>
-                  <Badge
-                    variant={workout.completedAt ? "default" : "secondary"}
-                  >
-                    {workout.completedAt ? "Completed" : "In Progress"}
-                  </Badge>
+                  <div className="flex items-center gap-2">
+                    <Badge
+                      variant={workout.completedAt ? "default" : "secondary"}
+                    >
+                      {workout.completedAt ? "Completed" : "In Progress"}
+                    </Badge>
+                    <Link
+                      href={`/dashboard/workout/${workout.id}`}
+                      className="text-muted-foreground hover:text-foreground"
+                    >
+                      <Pencil className="h-4 w-4" />
+                    </Link>
+                  </div>
                 </div>
                 <CardDescription>
                   Started at {format(workout.startedAt, "h:mm a")}

@@ -18,7 +18,9 @@ Lifting Diary Course — a Next.js 16 web application using React 19, TypeScript
 - `npm start` — Serve production build
 - `npm run lint` — Run ESLint (flat config, Next.js core web vitals + TypeScript rules)
 
--/docs/data-fetching.md
+- /docs/data-fetching.md
+- /docs/data-mutation.md
+-/docs/auth.md
 ## Architecture
 
 - **Next.js App Router** (`app/` directory) with file-based routing
