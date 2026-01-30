@@ -1,17 +1,8 @@
-import { drizzle, NeonHttpDatabase } from "drizzle-orm/neon-http";
+import { drizzle, type NeonHttpDatabase } from "drizzle-orm/neon-http";
 import * as schema from "./schema";
 
-let _db: NeonHttpDatabase<typeof schema> | null = null;
+const db = process.env.DATABASE_URL
+  ? drizzle(process.env.DATABASE_URL, { schema })
+  : (undefined as unknown as NeonHttpDatabase<typeof schema>);
 
-function getDb() {
-  if (!_db) {
-    _db = drizzle(process.env.DATABASE_URL!, { schema });
-  }
-  return _db;
-}
-
-export const db = new Proxy({} as NeonHttpDatabase<typeof schema>, {
-  get(_target, prop) {
-    return getDb()[prop as keyof typeof _db];
-  },
-});
+export { db };
