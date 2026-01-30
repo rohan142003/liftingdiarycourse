@@ -1,5 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+
+export const dynamic = "force-dynamic";
 import { format } from "date-fns";
 import { Dumbbell } from "lucide-react";
 import { getWorkoutsByDate } from "@/data/workouts";
