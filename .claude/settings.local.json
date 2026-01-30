@@ -19,7 +19,9 @@
       "Bash(npx next build:*)",
       "mcp__neon__list_projects",
       "mcp__neon__run_sql",
-      "Bash(del \"E:\\\\laude\\\\liftingdiarycourse\\\\nul\")"
+      "Bash(del \"E:\\\\laude\\\\liftingdiarycourse\\\\nul\")",
+      "Bash(git push:*)",
+      "Bash(git checkout:*)"
     ]
   }
 }
